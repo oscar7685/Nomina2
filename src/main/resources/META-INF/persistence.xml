@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="com.udec_nomina_jar_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.udec.modelo.Incapacidad</class>
+    <class>com.udec.modelo.Cargo</class>
+    <class>com.udec.modelo.ParametrosGenerales</class>
+    <class>com.udec.modelo.Periodo</class>
+    <class>com.udec.modelo.Nomina</class>
+    <class>com.udec.modelo.Novedad</class>
+    <class>com.udec.modelo.Empleado</class>
+    <class>com.udec.modelo.Concepto</class>
+    <class>com.udec.modelo.GrupoConcepto</class>
+    <class>com.udec.modelo.Maternidad</class>
+    <class>com.udec.modelo.Banco</class>
+    <class>com.udec.modelo.Novedadxconcepto</class>
+    <class>com.udec.modelo.Novedadmedic</class>
+    <class>com.udec.vista.Grupoconcepto</class>
+    <class>com.udec.modelo.Grupoconcepto</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/nomina2?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.password" value="123456"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+    </properties>
+  </persistence-unit>
+</persistence>
