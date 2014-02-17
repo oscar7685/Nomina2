@@ -6,6 +6,8 @@
 
 package com.udec.modelo;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -18,6 +20,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -34,6 +37,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Banco.findByCodigo", query = "SELECT b FROM Banco b WHERE b.codigo = :codigo"),
     @NamedQuery(name = "Banco.findByBanco", query = "SELECT b FROM Banco b WHERE b.banco = :banco")})
 public class Banco implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,7 +66,9 @@ public class Banco implements Serializable {
     }
 
     public void setIdbanco(Integer idbanco) {
+        Integer oldIdbanco = this.idbanco;
         this.idbanco = idbanco;
+        changeSupport.firePropertyChange("idbanco", oldIdbanco, idbanco);
     }
 
     public String getCodigo() {
@@ -69,7 +76,9 @@ public class Banco implements Serializable {
     }
 
     public void setCodigo(String codigo) {
+        String oldCodigo = this.codigo;
         this.codigo = codigo;
+        changeSupport.firePropertyChange("codigo", oldCodigo, codigo);
     }
 
     public String getBanco() {
@@ -77,7 +86,9 @@ public class Banco implements Serializable {
     }
 
     public void setBanco(String banco) {
+        String oldBanco = this.banco;
         this.banco = banco;
+        changeSupport.firePropertyChange("banco", oldBanco, banco);
     }
 
     @XmlTransient
@@ -121,6 +132,14 @@ public class Banco implements Serializable {
     @Override
     public String toString() {
         return "com.udec.modelo.Banco[ idbanco=" + idbanco + " ]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }

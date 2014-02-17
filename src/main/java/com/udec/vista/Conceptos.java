@@ -24,9 +24,9 @@ import javax.swing.JList;
  *
  * @author Oscar
  */
-public class Concepto extends JInternalFrame {
+public class Conceptos extends JInternalFrame {
     
-    public Concepto() {
+    public Conceptos() {
         initComponents();
         if (!Beans.isDesignTime()) {
             entityManager.getTransaction().begin();
@@ -238,13 +238,13 @@ public class Concepto extends JInternalFrame {
         FormListener() {}
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             if (evt.getSource() == saveButton) {
-                Concepto.this.saveButtonActionPerformed(evt);
+                Conceptos.this.saveButtonActionPerformed(evt);
             }
             else if (evt.getSource() == refreshButton) {
-                Concepto.this.refreshButtonActionPerformed(evt);
+                Conceptos.this.refreshButtonActionPerformed(evt);
             }
             else if (evt.getSource() == newButton) {
-                Concepto.this.newButtonActionPerformed(evt);
+                Conceptos.this.newButtonActionPerformed(evt);
             }
         }
     }// </editor-fold>//GEN-END:initComponents

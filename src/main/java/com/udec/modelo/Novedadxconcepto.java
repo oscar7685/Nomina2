@@ -6,6 +6,8 @@
 
 package com.udec.modelo;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -21,6 +23,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -41,6 +44,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Novedadxconcepto.findByNumeroCuotas", query = "SELECT n FROM Novedadxconcepto n WHERE n.numeroCuotas = :numeroCuotas"),
     @NamedQuery(name = "Novedadxconcepto.findByFechaInicio", query = "SELECT n FROM Novedadxconcepto n WHERE n.fechaInicio = :fechaInicio")})
 public class Novedadxconcepto implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -85,7 +90,9 @@ public class Novedadxconcepto implements Serializable {
     }
 
     public void setIdnovedad(Integer idnovedad) {
+        Integer oldIdnovedad = this.idnovedad;
         this.idnovedad = idnovedad;
+        changeSupport.firePropertyChange("idnovedad", oldIdnovedad, idnovedad);
     }
 
     public Float getValor() {
@@ -93,7 +100,9 @@ public class Novedadxconcepto implements Serializable {
     }
 
     public void setValor(Float valor) {
+        Float oldValor = this.valor;
         this.valor = valor;
+        changeSupport.firePropertyChange("valor", oldValor, valor);
     }
 
     public Float getSaldo() {
@@ -101,7 +110,9 @@ public class Novedadxconcepto implements Serializable {
     }
 
     public void setSaldo(Float saldo) {
+        Float oldSaldo = this.saldo;
         this.saldo = saldo;
+        changeSupport.firePropertyChange("saldo", oldSaldo, saldo);
     }
 
     public String getTipoSaldo() {
@@ -109,7 +120,9 @@ public class Novedadxconcepto implements Serializable {
     }
 
     public void setTipoSaldo(String tipoSaldo) {
+        String oldTipoSaldo = this.tipoSaldo;
         this.tipoSaldo = tipoSaldo;
+        changeSupport.firePropertyChange("tipoSaldo", oldTipoSaldo, tipoSaldo);
     }
 
     public String getAplicarQuincenal() {
@@ -117,7 +130,9 @@ public class Novedadxconcepto implements Serializable {
     }
 
     public void setAplicarQuincenal(String aplicarQuincenal) {
+        String oldAplicarQuincenal = this.aplicarQuincenal;
         this.aplicarQuincenal = aplicarQuincenal;
+        changeSupport.firePropertyChange("aplicarQuincenal", oldAplicarQuincenal, aplicarQuincenal);
     }
 
     public Float getTotalLibranza() {
@@ -125,7 +140,9 @@ public class Novedadxconcepto implements Serializable {
     }
 
     public void setTotalLibranza(Float totalLibranza) {
+        Float oldTotalLibranza = this.totalLibranza;
         this.totalLibranza = totalLibranza;
+        changeSupport.firePropertyChange("totalLibranza", oldTotalLibranza, totalLibranza);
     }
 
     public Integer getNumeroCuotas() {
@@ -133,7 +150,9 @@ public class Novedadxconcepto implements Serializable {
     }
 
     public void setNumeroCuotas(Integer numeroCuotas) {
+        Integer oldNumeroCuotas = this.numeroCuotas;
         this.numeroCuotas = numeroCuotas;
+        changeSupport.firePropertyChange("numeroCuotas", oldNumeroCuotas, numeroCuotas);
     }
 
     public Date getFechaInicio() {
@@ -141,7 +160,9 @@ public class Novedadxconcepto implements Serializable {
     }
 
     public void setFechaInicio(Date fechaInicio) {
+        Date oldFechaInicio = this.fechaInicio;
         this.fechaInicio = fechaInicio;
+        changeSupport.firePropertyChange("fechaInicio", oldFechaInicio, fechaInicio);
     }
 
     public Empleado getEmpleadoCodigo() {
@@ -149,7 +170,9 @@ public class Novedadxconcepto implements Serializable {
     }
 
     public void setEmpleadoCodigo(Empleado empleadoCodigo) {
+        Empleado oldEmpleadoCodigo = this.empleadoCodigo;
         this.empleadoCodigo = empleadoCodigo;
+        changeSupport.firePropertyChange("empleadoCodigo", oldEmpleadoCodigo, empleadoCodigo);
     }
 
     public Banco getBancoIdbanco() {
@@ -157,7 +180,9 @@ public class Novedadxconcepto implements Serializable {
     }
 
     public void setBancoIdbanco(Banco bancoIdbanco) {
+        Banco oldBancoIdbanco = this.bancoIdbanco;
         this.bancoIdbanco = bancoIdbanco;
+        changeSupport.firePropertyChange("bancoIdbanco", oldBancoIdbanco, bancoIdbanco);
     }
 
     public Concepto getConceptoIdconcepto() {
@@ -165,7 +190,9 @@ public class Novedadxconcepto implements Serializable {
     }
 
     public void setConceptoIdconcepto(Concepto conceptoIdconcepto) {
+        Concepto oldConceptoIdconcepto = this.conceptoIdconcepto;
         this.conceptoIdconcepto = conceptoIdconcepto;
+        changeSupport.firePropertyChange("conceptoIdconcepto", oldConceptoIdconcepto, conceptoIdconcepto);
     }
 
     @Override
@@ -191,6 +218,14 @@ public class Novedadxconcepto implements Serializable {
     @Override
     public String toString() {
         return "com.udec.modelo.Novedadxconcepto[ idnovedad=" + idnovedad + " ]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }

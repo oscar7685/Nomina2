@@ -6,6 +6,8 @@
 
 package com.udec.modelo;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -19,6 +21,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -39,6 +42,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Empleado.findByEstado", query = "SELECT e FROM Empleado e WHERE e.estado = :estado"),
     @NamedQuery(name = "Empleado.findByNumeroCuenta", query = "SELECT e FROM Empleado e WHERE e.numeroCuenta = :numeroCuenta")})
 public class Empleado implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -82,7 +87,9 @@ public class Empleado implements Serializable {
     }
 
     public void setCodigo(Integer codigo) {
+        Integer oldCodigo = this.codigo;
         this.codigo = codigo;
+        changeSupport.firePropertyChange("codigo", oldCodigo, codigo);
     }
 
     public String getCedula() {
@@ -90,7 +97,9 @@ public class Empleado implements Serializable {
     }
 
     public void setCedula(String cedula) {
+        String oldCedula = this.cedula;
         this.cedula = cedula;
+        changeSupport.firePropertyChange("cedula", oldCedula, cedula);
     }
 
     public String getNombre() {
@@ -98,7 +107,9 @@ public class Empleado implements Serializable {
     }
 
     public void setNombre(String nombre) {
+        String oldNombre = this.nombre;
         this.nombre = nombre;
+        changeSupport.firePropertyChange("nombre", oldNombre, nombre);
     }
 
     public Float getSalario() {
@@ -106,7 +117,9 @@ public class Empleado implements Serializable {
     }
 
     public void setSalario(Float salario) {
+        Float oldSalario = this.salario;
         this.salario = salario;
+        changeSupport.firePropertyChange("salario", oldSalario, salario);
     }
 
     public String getTipo() {
@@ -114,7 +127,9 @@ public class Empleado implements Serializable {
     }
 
     public void setTipo(String tipo) {
+        String oldTipo = this.tipo;
         this.tipo = tipo;
+        changeSupport.firePropertyChange("tipo", oldTipo, tipo);
     }
 
     public String getEstado() {
@@ -122,7 +137,9 @@ public class Empleado implements Serializable {
     }
 
     public void setEstado(String estado) {
+        String oldEstado = this.estado;
         this.estado = estado;
+        changeSupport.firePropertyChange("estado", oldEstado, estado);
     }
 
     public String getNumeroCuenta() {
@@ -130,7 +147,9 @@ public class Empleado implements Serializable {
     }
 
     public void setNumeroCuenta(String numeroCuenta) {
+        String oldNumeroCuenta = this.numeroCuenta;
         this.numeroCuenta = numeroCuenta;
+        changeSupport.firePropertyChange("numeroCuenta", oldNumeroCuenta, numeroCuenta);
     }
 
     @XmlTransient
@@ -156,7 +175,9 @@ public class Empleado implements Serializable {
     }
 
     public void setCargoCargoid(Cargo cargoCargoid) {
+        Cargo oldCargoCargoid = this.cargoCargoid;
         this.cargoCargoid = cargoCargoid;
+        changeSupport.firePropertyChange("cargoCargoid", oldCargoCargoid, cargoCargoid);
     }
 
     public Banco getBancoIdbanco() {
@@ -164,7 +185,9 @@ public class Empleado implements Serializable {
     }
 
     public void setBancoIdbanco(Banco bancoIdbanco) {
+        Banco oldBancoIdbanco = this.bancoIdbanco;
         this.bancoIdbanco = bancoIdbanco;
+        changeSupport.firePropertyChange("bancoIdbanco", oldBancoIdbanco, bancoIdbanco);
     }
 
     @XmlTransient
@@ -199,6 +222,14 @@ public class Empleado implements Serializable {
     @Override
     public String toString() {
         return "com.udec.modelo.Empleado[ codigo=" + codigo + " ]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }

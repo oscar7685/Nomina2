@@ -43,6 +43,7 @@ public class NominaMain extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -123,6 +124,14 @@ public class NominaMain extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem4);
+
+        jMenuItem8.setText("Novedad por Concepto");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem8);
 
         jMenuBar1.add(jMenu2);
 
@@ -232,7 +241,7 @@ public class NominaMain extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         this.jDesktopPane1.removeAll();
-        Concepto nm = new Concepto();
+        Conceptos nm = new Conceptos();
         for (MouseListener listener : ((javax.swing.plaf.basic.BasicInternalFrameUI) nm.getUI()).getNorthPane().getMouseListeners()) {
             ((javax.swing.plaf.basic.BasicInternalFrameUI) nm.getUI()).getNorthPane().removeMouseListener(listener);
         }
@@ -263,6 +272,23 @@ public class NominaMain extends javax.swing.JFrame {
         nm.setBounds(0, 0, 1180, 540);
         nm.show();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        this.jDesktopPane1.removeAll();
+        NovedadConcepto nm = new NovedadConcepto();
+        for (MouseListener listener : ((javax.swing.plaf.basic.BasicInternalFrameUI) nm.getUI()).getNorthPane().getMouseListeners()) {
+            ((javax.swing.plaf.basic.BasicInternalFrameUI) nm.getUI()).getNorthPane().removeMouseListener(listener);
+        }
+        nm.setFrameIcon(null);
+        BasicInternalFrameUI ui = (BasicInternalFrameUI) nm.getUI();
+        Container north = (Container) ui.getNorthPane();
+        north.remove(0);
+        north.validate();
+        north.repaint();
+        this.jDesktopPane1.add(nm);
+        nm.setBounds(0, 0, 521, 562);
+        nm.show();
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -313,5 +339,6 @@ public class NominaMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     // End of variables declaration//GEN-END:variables
 }
