@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 3.4.5
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 15-02-2014 a las 23:08:29
--- Versión del servidor: 5.5.24-log
--- Versión de PHP: 5.3.13
+-- Tiempo de generación: 17-02-2014 a las 22:08:58
+-- Versión del servidor: 5.5.16
+-- Versión de PHP: 5.3.8
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `cargo` (
   `cargo` varchar(100) DEFAULT NULL,
   `funciones` varchar(2000) DEFAULT NULL,
   PRIMARY KEY (`cargoid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Volcado de datos para la tabla `cargo`
@@ -70,7 +70,8 @@ INSERT INTO `cargo` (`cargoid`, `codigo`, `cargo`, `funciones`) VALUES
 (5, 'C0049', 'AUX. SERVICIOS GENERALES', 'HACER DE TODO UN POCO'),
 (6, 'C0083', 'SECRETARIA EJECUTIVA', 'ESCRIBIR'),
 (7, 'C0021', 'AUXILIAR DE MENSAJERIA', 'LLEVAR CARTAS'),
-(8, 'C0062', 'JEFE DIVISION ADMINISTRATIVA', 'MANDAR');
+(8, 'C0062', 'JEFE DIVISION ADMINISTRATIVA', 'MANDAR'),
+(9, 'C0005', 'AUX. CONSULTORIO ODONTOLOGICO', 'ASISTIR AL ODONTOLOGO');
 
 -- --------------------------------------------------------
 
@@ -138,11 +139,8 @@ CREATE TABLE IF NOT EXISTS `empleado` (
 --
 
 INSERT INTO `empleado` (`codigo`, `cedula`, `nombre`, `salario`, `tipo`, `estado`, `banco_idbanco`, `numero_cuenta`, `cargo_cargoid`) VALUES
-(45654, '987123456', 'DEWIS ROMERO', 1600000, 'PLANTA', 'ACTIVO', 3, '887957-5656', 4),
-(87565, '73214802', 'OSCAR BALLESTEROS', 3000000, 'CONTRATO', 'ACTIVO', 3, '78659877', 4),
-(123456, '73214585', 'DIANA PADILLA', 1300000, 'PLANTA', 'ACTIVO', 1, '54585654125', 2),
-(654123, '2299965', 'JUAN PABLO MONTOYA', 50000000, 'PLANTA', 'ACTIVO', 2, '789456321', 3),
 (30761780, '30761780', 'ACEVEDO DE ACEVEDO MARIA E', 832599, 'PLANTA', 'ACTIVO', 2, '8888888', 5),
+(33266823, '33266823', 'CASTILLA FLOREZ PATRICIA', 1120490, 'PLANTA', 'ACTIVO', NULL, NULL, 9),
 (45495621, '45495621', 'ACOSTA MANOSALVA GLORIA', 1622520, 'CONTRATO', 'ACTIVO', 2, '9999999', 6),
 (73129072, '73129072', 'BERROCAL CASTILLA EDGAR IG', 4694880, 'PLANTA', 'ACTIVO', 2, '98867584', 8),
 (1047416719, '1047416719', 'ARZUZA GONZALEZ JESSY ENRIQUE', 915861, 'PLANTA', 'ACTIVO', 2, '8795746', 7);
@@ -203,15 +201,6 @@ CREATE TABLE IF NOT EXISTS `novedadmedic` (
   KEY `fk_novedadmedic_empleado1_idx` (`empleado_codigo`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
---
--- Volcado de datos para la tabla `novedadmedic`
---
-
-INSERT INTO `novedadmedic` (`idnovedadmedic`, `fecha_inicio`, `fecha_final`, `tipo`, `empleado_codigo`) VALUES
-(1, '2014-01-16', '2014-01-18', 'incapacidad general', 123456),
-(3, '2014-01-19', '2014-01-20', 'incapacidad general', 654123),
-(4, '2014-02-05', '2014-02-07', 'incapacidad general', 654123);
-
 -- --------------------------------------------------------
 
 --
@@ -234,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `novedadxconcepto` (
   KEY `fk_novedadxconcepto_concepto1_idx` (`concepto_idconcepto`),
   KEY `fk_novedadxconcepto_banco1_idx` (`banco_idbanco`),
   KEY `fk_novedadxconcepto_empleado1_idx` (`empleado_codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
