@@ -6,6 +6,8 @@
 
 package com.udec.modelo;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +15,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -20,12 +24,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Oscar
+ * @author Ususario
  */
 @Entity
 @Table(name = "periodo", catalog = "nomina2", schema = "")
@@ -41,8 +46,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Periodo.findByHasta", query = "SELECT p FROM Periodo p WHERE p.hasta = :hasta"),
     @NamedQuery(name = "Periodo.findByActual", query = "SELECT p FROM Periodo p WHERE p.actual = :actual")})
 public class Periodo implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idperiodo")
     private Integer idperiodo;
@@ -77,7 +85,9 @@ public class Periodo implements Serializable {
     }
 
     public void setIdperiodo(Integer idperiodo) {
+        Integer oldIdperiodo = this.idperiodo;
         this.idperiodo = idperiodo;
+        changeSupport.firePropertyChange("idperiodo", oldIdperiodo, idperiodo);
     }
 
     public String getNombre() {
@@ -85,7 +95,9 @@ public class Periodo implements Serializable {
     }
 
     public void setNombre(String nombre) {
+        String oldNombre = this.nombre;
         this.nombre = nombre;
+        changeSupport.firePropertyChange("nombre", oldNombre, nombre);
     }
 
     public Integer getMes() {
@@ -93,7 +105,9 @@ public class Periodo implements Serializable {
     }
 
     public void setMes(Integer mes) {
+        Integer oldMes = this.mes;
         this.mes = mes;
+        changeSupport.firePropertyChange("mes", oldMes, mes);
     }
 
     public Integer getAnio() {
@@ -101,7 +115,9 @@ public class Periodo implements Serializable {
     }
 
     public void setAnio(Integer anio) {
+        Integer oldAnio = this.anio;
         this.anio = anio;
+        changeSupport.firePropertyChange("anio", oldAnio, anio);
     }
 
     public Integer getQuincena() {
@@ -109,7 +125,9 @@ public class Periodo implements Serializable {
     }
 
     public void setQuincena(Integer quincena) {
+        Integer oldQuincena = this.quincena;
         this.quincena = quincena;
+        changeSupport.firePropertyChange("quincena", oldQuincena, quincena);
     }
 
     public Date getDesde() {
@@ -117,7 +135,9 @@ public class Periodo implements Serializable {
     }
 
     public void setDesde(Date desde) {
+        Date oldDesde = this.desde;
         this.desde = desde;
+        changeSupport.firePropertyChange("desde", oldDesde, desde);
     }
 
     public Date getHasta() {
@@ -125,7 +145,9 @@ public class Periodo implements Serializable {
     }
 
     public void setHasta(Date hasta) {
+        Date oldHasta = this.hasta;
         this.hasta = hasta;
+        changeSupport.firePropertyChange("hasta", oldHasta, hasta);
     }
 
     public String getActual() {
@@ -133,7 +155,9 @@ public class Periodo implements Serializable {
     }
 
     public void setActual(String actual) {
+        String oldActual = this.actual;
         this.actual = actual;
+        changeSupport.firePropertyChange("actual", oldActual, actual);
     }
 
     @XmlTransient
@@ -168,6 +192,14 @@ public class Periodo implements Serializable {
     @Override
     public String toString() {
         return "com.udec.modelo.Periodo[ idperiodo=" + idperiodo + " ]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }
